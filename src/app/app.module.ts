@@ -48,12 +48,12 @@ import { OrderDetailPage } from '../pages/order-detail/order-detail';
 
 // AF2 Settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyCSe1cjodOoop5KDMIwK0tQ0XyJpyzyzMc",
-  authDomain: "ionic-restaurant-multi.firebaseapp.com",
-  databaseURL: "https://ionic-restaurant-multi.firebaseio.com",
-  projectId: "ionic-restaurant-multi",
-  storageBucket: "ionic-restaurant-multi.appspot.com",
-  messagingSenderId: "370957142335"
+  apiKey: "AIzaSyCHHAGs9PDFJFk0G-DclU258xJdddlhZUM",
+  authDomain: "eshop-dd728.firebaseapp.com",
+  databaseURL: "https://eshop-dd728.firebaseio.com",
+  projectId: "eshop-dd728",
+  storageBucket: "eshop-dd728.appspot.com",
+  messagingSenderId: "206779703563"
 };
 
 @NgModule({

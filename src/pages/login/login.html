@@ -10,10 +10,10 @@
     <!-- Logo -->
     <div padding text-center>
       <div class="logo primary-bg">
-        <ion-icon name="md-restaurant" color="light"></ion-icon>
+        <ion-icon name="ios-key" color="light"></ion-icon>
       </div>
       <h2 ion-text color="light">
-        Ionic 2 Restaurant
+        506 Cerrajeria
       </h2>
     </div>
 
@@ -21,12 +21,12 @@
     <ion-list class="list-form" padding>
 
       <ion-item>
-        <ion-label stacked>Email</ion-label>
+        <ion-label stacked>Correo</ion-label>
         <ion-input type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Password</ion-label>
+        <ion-label stacked>Contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
 
@@ -34,25 +34,25 @@
 
     <div>
       <button ion-button block color="primary" (click)="login()">
-        SIGN IN
+        INICIAR SESION
       </button>
 
-      <p text-center ion-text color="light">Or</p>
+      <p text-center ion-text color="light">O</p>
 
       <button ion-button block color="fb-color" (click)="loginWithFacebook()">
-        <span>Sign in with Facebook</span>
+        <span>Iniciar con Facebook</span>
       </button>
       <button ion-button block color="gg-color" (click)="loginWithGoogle()">
-        <span ion-text color="primary">Sign in with Google</span>
+        <span ion-text color="primary">Iniciar con Google</span>
       </button>
     </div>
 
-    <p text-right ion-text color="light">Forgot Password?</p>
+    <p text-right ion-text color="light">Olvidé mi contraseña</p>
 
 
     <!-- Other links -->
     <div text-center margin-top>
-      <span ion-text color="light" (click)="register()">New here? Sign up</span>
+      <span ion-text color="light" (click)="register()">Registrarse</span>
     </div>
 
   </div>

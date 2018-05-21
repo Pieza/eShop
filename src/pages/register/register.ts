@@ -28,7 +28,7 @@ export class RegisterPage {
   register() {
     if (!this.email || !this.password) {
       let alert = this.alertCtrl.create({
-        message: 'Please provide email and password',
+        message: 'Por favor introduce un correo y contraseña',
         buttons: ['OK']
       });
       return alert.present();
@@ -36,13 +36,13 @@ export class RegisterPage {
 
     if (this.password != this.confirmPassword) {
       let alert = this.alertCtrl.create({
-        message: 'Confirm password does not match',
+        message: 'Las contraseñas no concuerdan.',
         buttons: ['OK']
       });
       alert.present();
     } else {
       let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
+        content: 'Por favor espera...'
       });
       loading.present();
 

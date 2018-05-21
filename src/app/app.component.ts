@@ -9,21 +9,21 @@ import { AuthService } from '../services/auth-service';
 
 // import pages
 import { HomePage } from '../pages/home/home';
-// import {CategoriesPage} from '../pages/categories/categories';
-// import {FavoritePage} from '../pages/favorite/favorite';
+//import {CategoriesPage} from '../pages/categories/categories';
+import {FavoritePage} from '../pages/favorite/favorite';
 import { CartPage } from '../pages/cart/cart';
 // import {OfferPage} from '../pages/offer/offer';
 import { UserPage } from '../pages/user/user';
-import { SettingPage } from '../pages/setting/setting';
+//import { SettingPage } from '../pages/setting/setting';
 import { NewsPage } from '../pages/news/news';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
-import { ChatsPage } from '../pages/chats/chats';
 import { OrderService } from "../services/order-service";
 import { NotificationService } from "../services/notification-service";
 import { OrdersPage } from '../pages/orders/orders';
 import { OrderDetailPage } from '../pages/order-detail/order-detail';
 import { AngularFireAuth } from "angularfire2/auth/auth";
+
 
 // end import pages
 
@@ -43,7 +43,7 @@ export class MyApp {
 
   public pages = [
     {
-      title: 'Home',
+      title: 'Inicio',
       icon: 'ios-home-outline',
       count: 0,
       component: HomePage
@@ -55,62 +55,63 @@ export class MyApp {
      count: 0,
      component: CategoriesPage
      },
-
+     */
      {
-     title: 'Favorite',
+     title: 'Favoritos',
      icon: 'star-outline',
      count: 0,
      component: FavoritePage
      },
-     */
+    
     {
-      title: 'My Cart',
+      title: 'Mi carrito',
       icon: 'ios-cart-outline',
       count: 0,
       component: CartPage
     },
     {
-      title: 'Orders',
+      title: 'Mis Ordenes',
       icon: 'ios-time-outline',
       count: 0,
       component: OrdersPage
     },
     /*
      {
-     title: 'Offer',
+     title: 'Ofertas',
      icon: 'ios-pricetag-outline',
      count: 0,
      component: OfferPage
      },
-     */
+    */
+    /*
     {
       title: 'Setting',
       icon: 'ios-settings-outline',
       count: 0,
       component: SettingPage
     },
-
+    */
     {
-      title: 'News',
+      title: 'Noticias',
       icon: 'ios-paper-outline',
       count: 0,
       component: NewsPage
     },
 
     {
-      title: 'About us',
+      title: 'Contacto',
       icon: 'ios-information-circle-outline',
       count: 0,
       component: AboutPage
     },
-
+    /*
     {
       title: 'Supports',
       icon: 'ios-help-circle-outline',
       count: 0,
       component: ChatsPage
     },
-
+    */
     // import menu
   ];
 
