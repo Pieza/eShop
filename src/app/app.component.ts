@@ -15,7 +15,7 @@ import { CartPage } from '../pages/cart/cart';
 // import {OfferPage} from '../pages/offer/offer';
 import { UserPage } from '../pages/user/user';
 //import { SettingPage } from '../pages/setting/setting';
-import { NewsPage } from '../pages/news/news';
+//import { NewsPage } from '../pages/news/news';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
 import { OrderService } from "../services/order-service";
@@ -56,13 +56,14 @@ export class MyApp {
      component: CategoriesPage
      },
      */
+     /*
      {
      title: 'Favoritos',
      icon: 'star-outline',
      count: 0,
      component: FavoritePage
      },
-    
+    */
     {
       title: 'Mi carrito',
       icon: 'ios-cart-outline',
@@ -91,19 +92,21 @@ export class MyApp {
       component: SettingPage
     },
     */
+    /*
     {
       title: 'Noticias',
       icon: 'ios-paper-outline',
       count: 0,
       component: NewsPage
     },
-
+    */
     {
       title: 'Contacto',
       icon: 'ios-information-circle-outline',
       count: 0,
       component: AboutPage
     },
+    
     /*
     {
       title: 'Supports',
