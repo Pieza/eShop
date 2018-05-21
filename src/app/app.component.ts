@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth-service';
 // import pages
 import { HomePage } from '../pages/home/home';
 //import {CategoriesPage} from '../pages/categories/categories';
-import {FavoritePage} from '../pages/favorite/favorite';
+//import {FavoritePage} from '../pages/favorite/favorite';
 import { CartPage } from '../pages/cart/cart';
 // import {OfferPage} from '../pages/offer/offer';
 import { UserPage } from '../pages/user/user';
