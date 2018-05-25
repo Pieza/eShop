@@ -24,13 +24,13 @@
 <ion-content class=" gray-bg">
 
   <!--select payment method-->
-  <!--
-  <div margin>Payment</div>
+  
+  <div margin>Metodo de pago</div>
   <ion-list class="list-full-border card" margin radio-group>
 
     <ion-item>
       <ion-label>
-        Credit card
+        Tarjeta de credito
         <p class="text-hint">
           XXXX XXXX XXXX 4678
         </p>
@@ -40,20 +40,20 @@
 
     <ion-item>
       <ion-label>
-        Cash on delivery
+        Pagar en la entrega
         <p class="text-hint">
-          Free
+          + ₡2 000.
         </p>
       </ion-label>
       <ion-radio></ion-radio>
     </ion-item>
 
   </ion-list>
-  -->
+  
 
   <!--shipping address-->
   <div margin>
-    <span>Shipping address</span>
+    <span>Dirección de envio</span>
     <ion-icon name="md-create" class="pull-right" (click)="enableEditing()"></ion-icon>
   </div>
   <div class="card light-bg" margin-left margin-right padding>
@@ -68,11 +68,11 @@
   <ion-title>
     <span ion-text color="dark">Total</span>
     <br/>
-    <span class="bold" ion-text color="danger">${{ cart.total }}</span>
+    <span class="bold" ion-text color="energized">₡{{ cart.total }}</span>
   </ion-title>
   <ion-buttons end>
-    <button ion-button (click)="buy()" color="danger">
-      PLACE ORDER
+    <button ion-button (click)="buy()" color="energized">
+      REALIZAR ORDEN
     </button>
   </ion-buttons>
 </ion-footer>
