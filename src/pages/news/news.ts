@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
-import { PostService } from '../../services/post-service';
-
+import { PostProvider } from "../../providers/post/post";
 /*
  Generated class for the LoginPage page.
 
@@ -17,8 +15,8 @@ export class NewsPage {
   // list of posts
   public posts: any;
 
-  constructor(public nav: NavController, public postService: PostService) {
+  constructor(public nav: NavController, public postProvider: PostProvider) {
     // set sample data
-    this.posts = postService.getAll();
+    this.posts = postProvider.all();
   }
 }

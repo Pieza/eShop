@@ -22,9 +22,9 @@
 
 <ion-content>
   <div class="list-items">
-    <div class="item-menu" *ngFor="let item of items | async" (click)="viewItem(item)">
+    <div class="item-menu" *ngFor="let item of items" (click)="viewItem(item)">
 
-      <img src="{{ item.thumb }}" alt="{{ item.name }}"/>
+      <img src="{{ item.thumbnail }}" alt="{{ item.name }}"/>
 
       <div class="overlay">
 

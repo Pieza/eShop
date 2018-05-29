@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ restaurant.name }}</ion-title>
+    <ion-title>{{ store.name }}</ion-title>
     <ion-buttons end>
       <button ion-button>
         <ion-icon name="md-more"></ion-icon>
@@ -24,7 +24,7 @@
   <div class="list-items">
     <div class="item-menu" *ngFor="let category of categories" (click)="viewCategory(category)">
 
-      <img src="{{ category.thumb }}" alt="{{ category.name }}"/>
+      <img src="{{ category.thumbnail }}" alt="{{ category.name }}"/>
 
       <div class="overlay">
 

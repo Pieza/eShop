@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { RegisterPage } from "../register/register";
-import { HomePage } from "../home/home";
-import { AuthService } from "../../services/auth-service";
-
+import { UserProvider } from "../../providers/user/user";
+import { LoadingProvider } from "../../providers/loading/loading";
 
 /*
  Generated class for the LoginPage page.
@@ -19,8 +18,8 @@ export class LoginPage {
   email: any;
   password: any;
 
-  constructor(public nav: NavController, public authService: AuthService, public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController) {
+  constructor(public nav: NavController, public userProvider: UserProvider, public alertCtrl: AlertController,
+              public loadingProvider: LoadingProvider) {
   }
 
   // go to register page
@@ -32,38 +31,34 @@ export class LoginPage {
   login() {
     if (!this.email || !this.password) {
       let alert = this.alertCtrl.create({
-        message: 'Por favor introduce tu email y contraseña',
+        message: 'Please provide email and password',
         buttons: ['OK']
       });
       return alert.present();
     }
 
-    let loading = this.loadingCtrl.create({
-      content: 'Por favor espera...'
-    });
-    loading.present();
+    this.loadingProvider.present('Please wait...');
 
-    this.authService.login(this.email, this.password).then(authData => {
-      loading.dismiss();
-      this.nav.setRoot(HomePage);
+    this.userProvider.login(this.email, this.password).subscribe(authData => {
+      this.loadingProvider.dismiss();
+      // this.nav.setRoot(HomePage);
     }, error => {
-      loading.dismiss();
+      this.loadingProvider.dismiss();
       let alert = this.alertCtrl.create({
         message: error.message,
         buttons: ['OK']
       });
       alert.present();
     });
-    //this.nav.setRoot(HomePage);
   }
 
   // login with facebook
   loginWithFacebook() {
-    this.authService.loginWithFacebook();
+    this.userProvider.loginWithFacebook();
   }
 
   // login with google
   loginWithGoogle() {
-    this.authService.loginWithGoogle();
+    this.userProvider.loginWithGoogle();
   }
 }

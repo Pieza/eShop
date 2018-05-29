@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
-import { ItemService } from '../../services/item-service';
 import { CartPage } from "../cart/cart";
-import { CartService } from "../../services/cart-service";
+import { Item } from "../../models/item";
+import { Store } from "../../models/store";
+import { CartProvider } from "../../providers/cart/cart";
 
 /*
  Generated class for the LoginPage page.
@@ -15,14 +16,14 @@ import { CartService } from "../../services/cart-service";
   templateUrl: 'item.html'
 })
 export class ItemPage {
-  // item object
-  item: any;
-  restaurant: any;
+  item: Item;
+  size: number;
+  store: Store;
 
-  constructor(public nav: NavController, public itemService: ItemService, public alertController: AlertController,
-              public navParams: NavParams, public cartService: CartService) {
+  constructor(public nav: NavController, public alertController: AlertController, public navParams: NavParams,
+              public cartProvider: CartProvider) {
     this.item = navParams.get('item');
-    this.restaurant = navParams.get('restaurant');
+    this.store = navParams.get('store');
   }
 
   // toggle favorite
@@ -51,27 +52,34 @@ export class ItemPage {
         {
           text: 'Save',
           handler: data => {
-            // add item to cart
-            this.cartService.addItem(this.item, this.restaurant, data.quantity, (cart) => {
-              // then alert to user
-              let alert = this.alertController.create({
-                title: 'Info',
-                message: 'Item added to cart',
-                buttons: [
-                  {
-                    text: 'Cart',
-                    handler: data => {
-                      this.nav.push(CartPage);
-                    }
-                  },
-                  {
-                    text: 'Close'
-                  }
-                ]
-              });
+            let variations = [];
+            let size = this.size == undefined ? null : this.item.sizes[this.size];
 
-              alert.present();
+            this.item.variations.forEach(vr => {
+              if (vr.checked) {
+                variations.push(vr);
+              }
             });
+            // add item to cart
+            this.cartProvider.addItem(this.item, parseInt(data.quantity), this.store, size, variations);
+            // then alert to user
+            let alert = this.alertController.create({
+              title: 'Info',
+              message: 'Item added to cart',
+              buttons: [
+                {
+                  text: 'Cart',
+                  handler: data => {
+                    this.nav.push(CartPage);
+                  }
+                },
+                {
+                  text: 'Close'
+                }
+              ]
+            });
+
+            alert.present();
           }
         }
       ]

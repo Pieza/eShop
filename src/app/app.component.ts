@@ -3,28 +3,25 @@ import { Platform, AlertController } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AngularFireAuth } from "angularfire2/auth/auth";
 
-// import service
-import { AuthService } from '../services/auth-service';
+// import provider
+import { UserProvider } from "../providers/user/user";
+import { NotificationProvider } from "../providers/notification/notification";
 
 // import pages
 import { HomePage } from '../pages/home/home';
-//import {CategoriesPage} from '../pages/categories/categories';
-//import {FavoritePage} from '../pages/favorite/favorite';
+// import {CategoriesPage} from '../pages/categories/categories';
+// import {FavoritePage} from '../pages/favorite/favorite';
 import { CartPage } from '../pages/cart/cart';
 // import {OfferPage} from '../pages/offer/offer';
 import { UserPage } from '../pages/user/user';
-//import { SettingPage } from '../pages/setting/setting';
-//import { NewsPage } from '../pages/news/news';
+import { SettingPage } from '../pages/setting/setting';
+import { NewsPage } from '../pages/news/news';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
-import { OrderService } from "../services/order-service";
-import { NotificationService } from "../services/notification-service";
+import { ChatsPage } from '../pages/chats/chats';
 import { OrdersPage } from '../pages/orders/orders';
-import { OrderDetailPage } from '../pages/order-detail/order-detail';
-import { AngularFireAuth } from "angularfire2/auth/auth";
-
-
 // end import pages
 
 @Component({
@@ -34,12 +31,10 @@ import { AngularFireAuth } from "angularfire2/auth/auth";
   }
 })
 export class MyApp {
-
-  public rootPage: any;
-
-  public nav: any;
-
-  public user = {};
+  rootPage: any;
+  user: any;
+  nav: any;
+  notiSubcriber: any;
 
   public pages = [
     {
@@ -55,35 +50,34 @@ export class MyApp {
      count: 0,
      component: CategoriesPage
      },
-     */
-     /*
+
      {
-     title: 'Favoritos',
+     title: 'Favorite',
      icon: 'star-outline',
      count: 0,
      component: FavoritePage
      },
-    */
+     */
     {
-      title: 'Mi carrito',
+      title: 'Mi Carrito',
       icon: 'ios-cart-outline',
       count: 0,
       component: CartPage
     },
     {
-      title: 'Mis Ordenes',
+      title: 'Ordenes',
       icon: 'ios-time-outline',
       count: 0,
       component: OrdersPage
     },
     /*
      {
-     title: 'Ofertas',
+     title: 'Offer',
      icon: 'ios-pricetag-outline',
      count: 0,
      component: OfferPage
      },
-    */
+     */
     /*
     {
       title: 'Setting',
@@ -94,7 +88,7 @@ export class MyApp {
     */
     /*
     {
-      title: 'Noticias',
+      title: 'News',
       icon: 'ios-paper-outline',
       count: 0,
       component: NewsPage
@@ -106,7 +100,6 @@ export class MyApp {
       count: 0,
       component: AboutPage
     },
-    
     /*
     {
       title: 'Supports',
@@ -118,65 +111,35 @@ export class MyApp {
     // import menu
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public authService: AuthService, public notificationService: NotificationService,
-              public alertCtrl: AlertController, public orderService: OrderService, public afAuth: AngularFireAuth) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public alertCtrl: AlertController,
+              public afAuth: AngularFireAuth, public userProvider: UserProvider,
+              public notificationProvider: NotificationProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
 
-      // check for login stage, then redirect
+      // check for auth status
       afAuth.authState.subscribe(authData => {
+        // if user logged in
         if (authData) {
-          this.nav.setRoot(HomePage);
-
-          this.user = authService.getUserData();
-        } else {
-          this.nav.setRoot(LoginPage);
-        }
-      });
-
-      // notification subscribe
-      afAuth.authState.take(1).subscribe(authData => {
-        if (authData) {
-          let isShowing = false;
-
-          this.notificationService.getAll().subscribe(records => {
-            if (records.length && !isShowing) {
-              // show the last notifications
-              let lastRecord = records[records.length - 1];
-              if (lastRecord.object_type == 'order') {
-                let alert = this.alertCtrl.create({
-                  title: 'Order updated',
-                  subTitle: 'Your order has been updated',
-                  buttons: [
-                    {
-                      text: 'View',
-                      handler: data => {
-                        // find order object by id
-                        this.orderService.getRecord(lastRecord.order_id).take(1).subscribe(data => {
-                          this.nav.push(OrderDetailPage, {order: data});
-                        });
-                        // remove this notifications
-                        this.notificationService.remove(lastRecord.$key);
-                        isShowing = false;
-                      }
-                    },
-                    {
-                      text: 'Close',
-                      handler: data => {
-                        this.notificationService.remove(lastRecord.$key);
-                        isShowing = false;
-                      }
-                    }
-                  ]
-                });
-                isShowing = true;
-                alert.present();
-              }
+          // set provider init data
+          this.userProvider.initProviders(authData);
+          this.userProvider.getCurrent().take(1).subscribe(user => {
+            if (user) {
+              // set current user
+              this.user = user;
+              this.nav.setRoot(HomePage);
+              this.subNoti();
+            } else {
+              this.logout();
             }
           });
+        } else { // no auth
+          this.user = null;
+          this.nav.setRoot(LoginPage);
+          this.unSubNoti();
         }
       });
     });
@@ -188,15 +151,63 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  // view my profile
-  viewMyProfile() {
+  viewAccount() {
     this.nav.setRoot(UserPage);
   }
 
   // logout
   logout() {
-    this.authService.logout().then(() => {
-      this.nav.setRoot(LoginPage);
+    this.userProvider.logout().then(() => {
+      this.unSubNoti();
     });
+  }
+
+  // subscribe for notifications
+  subNoti() {
+    let isShowing = false;
+    let notiCount = 0;
+    let alert;
+
+    // subscribe to notifications
+    this.notiSubcriber = this.notificationProvider.all().subscribe(records => {
+      console.log('notifications', records);
+      // Only listen for new notifcation
+      if (records.length > notiCount && !isShowing) {
+        isShowing = true;
+        // show the notifications
+
+        alert = this.alertCtrl.create({
+          title: 'Order updated',
+          subTitle: 'Your ' + records.length + ' order(s) has been updated.',
+          buttons: [
+            {
+              text: 'View',
+              handler: data => {
+                this.nav.setRoot(OrdersPage);
+                // remove this notifications
+                this.notificationProvider.removeAll(records);
+                isShowing = false;
+              }
+            },
+            {
+              text: 'Close',
+              handler: data => {
+                this.notificationProvider.removeAll(records);
+                isShowing = false;
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
+
+      notiCount = records.length;
+    });
+  }
+
+  unSubNoti() {
+    if (this.notiSubcriber) {
+      this.notiSubcriber.unsubscribe();
+    }
   }
 }

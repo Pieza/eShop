@@ -26,7 +26,7 @@
   <div class="cover">
     <ion-slides pager>
       <ion-slide>
-        <img class="full-image" src="{{ item.thumb }}" alt=""/>
+        <img class="full-image" src="{{ item.thumbnail }}" alt=""/>
       </ion-slide>
       <ion-slide *ngFor="let img of item.images">
         <img class="full-image" src="{{ img }}" alt=""/>
@@ -63,7 +63,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-list class="list-full-border" no-margin radio-group [(ngModel)]="item.size">
+  <ion-list class="list-full-border" no-margin radio-group [(ngModel)]="size">
     <ion-item-divider>Sizes</ion-item-divider>
     <ion-item *ngFor="let size of item.sizes, let i = index">
       <ion-label>{{ size.name }}: ${{ size.price }}</ion-label>
@@ -73,8 +73,8 @@
 
   <ion-list class="list-full-border" no-margin>
     <ion-item-divider>Options</ion-item-divider>
-    <ion-item *ngFor="let option of item.options, let i = index">
-      <ion-label>{{ option.name }}</ion-label>
+    <ion-item *ngFor="let option of item.variations, let i = index">
+      <ion-label>{{ option.name }}: ${{ option.price }}</ion-label>
       <ion-checkbox color="primary" [(ngModel)]="option.checked"></ion-checkbox>
     </ion-item>
   </ion-list>

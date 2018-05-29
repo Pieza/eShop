@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AuthService } from "../../services/auth-service";
+import { User } from "../../models/user";
+import { UserProvider } from "../../providers/user/user";
 
 
 /*
@@ -14,9 +15,11 @@ import { AuthService } from "../../services/auth-service";
   templateUrl: 'setting.html'
 })
 export class SettingPage {
-  user = {};
+  user: User;
 
-  constructor(public nav: NavController, public authService: AuthService) {
-    this.user = authService.getUserData();
+  constructor(public nav: NavController, public userProvider: UserProvider) {
+    userProvider.getCurrent().subscribe(user => {
+      this.user = user;
+    })
   }
 }

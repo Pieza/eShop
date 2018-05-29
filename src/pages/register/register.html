@@ -10,10 +10,10 @@
     <!-- Logo -->
     <div padding text-center>
       <div class="logo primary-bg">
-        <ion-icon name="ios-key" color="light"></ion-icon>
+        <ion-icon name="md-restaurant" color="light"></ion-icon>
       </div>
       <h2 ion-text color="light">
-        506 Cerrajeria
+        Ionic 2 Restaurant
       </h2>
     </div>
 
@@ -21,17 +21,17 @@
     <ion-list class="list-form" padding>
 
       <ion-item>
-        <ion-label stacked>Correo</ion-label>
+        <ion-label stacked>Email</ion-label>
         <ion-input type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Contraseña</ion-label>
+        <ion-label stacked>Password</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Confirmar Contraseña</ion-label>
+        <ion-label stacked>Confirm Password</ion-label>
         <ion-input type="password" [(ngModel)]="confirmPassword"></ion-input>
       </ion-item>
 
@@ -39,13 +39,13 @@
 
     <div margin-top>
       <button ion-button block color="primary" (click)="register()">
-        REGISTRAR
+        SIGN UP
       </button>
     </div>
 
     <!-- Other links -->
     <div text-center margin-top>
-      <span ion-text color="light" (click)="login()">Ya tengo una cuenta.</span>
+      <span ion-text color="light" (click)="login()">I have an account</span>
     </div>
 
   </div>

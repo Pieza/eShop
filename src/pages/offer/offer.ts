@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ItemService } from '../../services/item-service';
 import { ItemPage } from "../item/item";
+import { ItemProvider } from "../../providers/item/item";
 
 /*
  Generated class for the LoginPage page.
@@ -17,9 +17,9 @@ export class OfferPage {
   // items
   public items: any;
 
-  constructor(public nav: NavController, public itemService: ItemService) {
+  constructor(public nav: NavController, public itemProvider: ItemProvider) {
     // get all items
-    this.items = itemService.getAll();
+    this.items = itemProvider.all();
   }
 
   // view item detail

@@ -28,16 +28,16 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="card white-bg" *ngFor="let rest of restaurants" margin-top padding>
-    <div class="border-bottom" padding-bottom (click)="viewRestaurant(rest)">
-      <strong>{{ rest.name }}</strong>
+  <div class="card white-bg" *ngFor="let store of stores" margin-top padding>
+    <div class="border-bottom" padding-bottom (click)="viewRestaurant(store)">
+      <strong>{{ store.name }}</strong>
       <br>
-      <span ion-text color="dark">{{ rest.address}}</span>
+      <span ion-text color="dark">{{ store.address}}</span>
     </div>
     <ion-grid no-padding margin-top>
       <ion-row>
-        <ion-col *ngFor="let cat of rest.cats, let i = index" col-6 (click)="viewCategory(rest, cat)">
-          <img src="{{ cat.thumb }}" alt="">
+        <ion-col *ngFor="let cat of store.cats, let i = index" col-6 (click)="viewCategory(store, cat)">
+          <img src="{{ cat.thumbnail }}" alt="">
         </ion-col>
       </ion-row>
     </ion-grid>

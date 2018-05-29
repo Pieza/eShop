@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { OrderService } from '../../services/order-service';
-import { OrderDetailPage } from "../order-detail/order-detail";
+import { OrderProvider } from "../../providers/order/order";
+import { Order } from "../../models/order";
 
 /*
   Generated class for the LoginPage page.
@@ -14,15 +14,10 @@ import { OrderDetailPage } from "../order-detail/order-detail";
   templateUrl: 'orders.html',
 })
 export class OrdersPage {
-  public orders: any;
+  public orders: Array<Order>;
 
-  constructor(public nav: NavController, public orderService: OrderService) {
+  constructor(public nav: NavController, public orderProvider: OrderProvider) {
     // get list orders from firebase
-    this.orders = orderService.getAll();
-  }
-
-  // view order detail
-  viewOrder(order) {
-    this.nav.push(OrderDetailPage, {order: order});
+    orderProvider.all().subscribe(orders => this.orders = orders);
   }
 }

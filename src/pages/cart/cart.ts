@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CartService } from '../../services/cart-service';
 import { CheckoutPage } from "../checkout/checkout";
 import { Storage } from '@ionic/storage';
-import { TaxService } from "../../services/tax-service";
+import { Cart } from "../../models/cart";
+import { CartProvider } from "../../providers/cart/cart";
 
 /*
  Generated class for the LoginPage page.
@@ -17,47 +17,29 @@ import { TaxService } from "../../services/tax-service";
 })
 export class CartPage {
   // cart data
-  cart = {
-    restaurants: {},
-    total: 0
-  };
-  // restaurants array
-  rests = [];
+  cart: Cart;
 
-  constructor(public nav: NavController, public cartService: CartService, public storage: Storage,
-              public taxService: TaxService) {
-    cartService.getCart().then((data) => {
-      if (data) {
-        cartService.applyTax(data).add(() => {
-          this.cart = cartService.calculateTotalPrice();
-          console.log(this.cart);
-
-          // convert restaurants to array
-          Object.keys(this.cart.restaurants).forEach(restId => {
-            this.rests.push(this.cart.restaurants[restId]);
-          });
-        })
-      }
-    });
+  constructor(public nav: NavController, public storage: Storage, public cartProvider: CartProvider) {
+    this.cart = this.cartProvider.get();
   }
 
   // plus quantity
-  plusQty(item) {
-    item.quantity++;
-    this.cartService.changeQty(this.cart);
+  addQty(item) {
+    this.cartProvider.addQty(item.id, 1, item.variations, item.size);
   }
 
   // minus quantity
   minusQty(item) {
-    if (item.quantity > 1) {
-      item.quantity--;
+    if (item.quantity < 2) {
+      return ;
     }
-    this.cartService.changeQty(this.cart);
+
+    this.cartProvider.removeItem(item,1);
   }
 
   // remove item from cart
   remove(restId, index) {
-    this.cartService.removeItem(restId, index);
+    this.cartProvider.removeItem(restId, index);
   }
 
   // click buy button

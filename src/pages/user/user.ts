@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController, ToastController } from 'ionic-angular';
-import { AuthService } from "../../services/auth-service";
 import * as firebase from 'firebase';
+import { UserProvider } from "../../providers/user/user";
+import { User } from "../../models/user";
 
 
 /*
@@ -15,21 +16,18 @@ import * as firebase from 'firebase';
   templateUrl: 'user.html'
 })
 export class UserPage {
-  user: any = {};
-  uid: any;
+  user: User;
 
-  constructor(public nav: NavController, public authService: AuthService, public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController) {
-    let user = authService.getUserData();
-    this.uid = user.uid;
-    authService.getUser(this.uid).take(1).subscribe(snapshot => {
-      this.user = snapshot;
-    });
+  constructor(public nav: NavController, public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+              public userProvider: UserProvider) {
+    userProvider.getCurrent().subscribe(user => {
+      this.user = user;
+    })
   }
 
   // save user info
   submit() {
-    this.authService.updateUserProfile(this.uid, this.user);
+    this.userProvider.update(this.user);
 
     let toast = this.toastCtrl.create({
       message: 'User updated',
@@ -58,7 +56,7 @@ export class UserPage {
       let iRef = storageRef.child(path);
       iRef.put(selectedFile).then((snapshot) => {
         loading.dismiss();
-        this.user.photoURL = snapshot.downloadURL;
+        this.user.photoUrl = snapshot.downloadURL;
       });
     }
   }

@@ -21,10 +21,10 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4 text-center>
-          <img class="profile-picture circle" src="{{ user.photoURL }}">
+          <img class="profile-picture circle" src="{{ user?.photoUrl }}">
         </ion-col>
         <ion-col width-66>
-          <h4 padding no-margin ion-text color="light">{{ user.displayName }}</h4>
+          <h4 padding no-margin ion-text color="light">{{ user?.name }}</h4>
 
         </ion-col>
       </ion-row>

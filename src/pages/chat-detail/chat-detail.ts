@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ChatService } from '../../services/chat-service';
+import { NavController, NavParams } from 'ionic-angular';
+import { ChatProvider } from "../../providers/chat/chat";
 
 /*
  Generated class for the LoginPage page.
@@ -15,9 +15,8 @@ import { ChatService } from '../../services/chat-service';
 export class ChatDetailPage {
   public chat: any;
 
-  constructor(public nav: NavController, public chatService: ChatService) {
+  constructor(public nav: NavController, public chatProvider: ChatProvider, public navParams: NavParams) {
     // get sample data only
-    //this.chat = chatService.getItem(navParams.get('id'));
-    this.chat = chatService.getItem(0);
+    this.chat = chatProvider.get(navParams.get('id'));
   }
 }

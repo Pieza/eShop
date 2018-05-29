@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CategoryService } from '../../services/category-service';
 import { ItemPage } from "../item/item";
-import { ItemService } from "../../services/item-service";
+import { Item } from "../../models/item";
+import { Category } from "../../models/category";
+import { Store } from "../../models/store";
+import { ItemProvider } from "../../providers/item/item";
 
 /*
  Generated class for the LoginPage page.
@@ -15,22 +17,21 @@ import { ItemService } from "../../services/item-service";
   templateUrl: 'category.html'
 })
 export class CategoryPage {
-  items: any;
-  category: any;
-  restaurant: any;
+  items: Array<Item>;
+  category: Category;
+  store: Store;
 
-  constructor(public nav: NavController, public categoryService: CategoryService, public navParams: NavParams,
-              public itemService: ItemService) {
+  constructor(public nav: NavController, public navParams: NavParams, public itemProvider: ItemProvider) {
     this.category = navParams.get('category');
-    this.restaurant = navParams.get('restaurant');
-    this.items = itemService.findByCategory(this.category.$key, this.restaurant.$key);
+    this.store = navParams.get('store');
+    itemProvider.findByCategoryId(this.category.id, 'name', 'asc').subscribe(items => this.items = items);
   }
 
   // view item detail
   viewItem(item) {
     this.nav.push(ItemPage, {
       item: item,
-      restaurant: this.restaurant
+      store: this.store
     })
   }
 }

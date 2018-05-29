@@ -8,19 +8,20 @@ import { IonicStorageModule } from '@ionic/storage';
 
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from "angularfire2/firestore"
 
-// import services
-import { CategoryService } from '../services/category-service';
-import { ItemService } from '../services/item-service';
-import { CartService } from '../services/cart-service';
-import { PostService } from '../services/post-service';
-import { ChatService } from '../services/chat-service';
-import { NotificationService } from '../services/notification-service';
-import { TaxService } from "../services/tax-service";
-import { RestaurantService } from '../services/restaurant-service';
-// end import services
+// import providers
+import { CategoryProvider } from '../providers/category/category';
+import { ItemProvider } from '../providers/item/item';
+import { OrderProvider } from '../providers/order/order';
+import { StoreProvider } from '../providers/store/store';
+import { CartProvider } from '../providers/cart/cart';
+import { UserProvider } from '../providers/user/user';
+import { LoadingProvider } from '../providers/loading/loading';
+import { NotificationProvider } from "../providers/notification/notification";
+import { PostProvider } from '../providers/post/post';
+import { ChatProvider } from '../providers/chat/chat';
 
 // import pages
 import { AboutPage } from '../pages/about/about';
@@ -40,20 +41,17 @@ import { OfferPage } from '../pages/offer/offer';
 import { RegisterPage } from '../pages/register/register';
 import { SettingPage } from '../pages/setting/setting';
 import { UserPage } from '../pages/user/user';
-import { OrderService } from "../services/order-service";
-import { AuthService } from "../services/auth-service";
 import { OrdersPage } from '../pages/orders/orders';
-import { OrderDetailPage } from '../pages/order-detail/order-detail';
 // end import pages
 
 // AF2 Settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyCHHAGs9PDFJFk0G-DclU258xJdddlhZUM",
-  authDomain: "eshop-dd728.firebaseapp.com",
-  databaseURL: "https://eshop-dd728.firebaseio.com",
-  projectId: "eshop-dd728",
-  storageBucket: "eshop-dd728.appspot.com",
-  messagingSenderId: "206779703563"
+  apiKey: "AIzaSyCXOhx463t0_9rPZvwwHPi75-Ktp5M0J1k",
+  authDomain: "cerrajeria-c46c3.firebaseapp.com",
+  databaseURL: "https://cerrajeria-c46c3.firebaseio.com",
+  projectId: "cerrajeria-c46c3",
+  storageBucket: "cerrajeria-c46c3.appspot.com",
+  messagingSenderId: "822653543494"
 };
 
 @NgModule({
@@ -77,13 +75,12 @@ export const firebaseConfig = {
     SettingPage,
     UserPage,
     OrdersPage,
-    OrderDetailPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
     IonicStorageModule.forRoot()
   ],
@@ -108,21 +105,21 @@ export const firebaseConfig = {
     SettingPage,
     UserPage,
     OrdersPage,
-    OrderDetailPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    CategoryService,
-    ItemService,
-    CartService,
-    PostService,
-    ChatService,
-    OrderService,
-    AuthService,
-    NotificationService,
-    TaxService,
-    RestaurantService,
+    CategoryProvider,
+    ItemProvider,
+    OrderProvider,
+    StoreProvider,
+    CartProvider,
+    UserProvider,
+    LoadingProvider,
+    CartProvider,
+    NotificationProvider,
+    PostProvider,
+    ChatProvider
     /* import services */
   ]
 })

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CategoryPage } from "../category/category";
-import { RestaurantService } from "../../services/restaurant-service";
 import { CategoriesPage } from "../categories/categories";
+import { StoreProvider } from "../../providers/store/store";
+import { CategoryProvider } from "../../providers/category/category";
 
 /*
  Generated class for the LoginPage page.
@@ -23,41 +24,30 @@ export class HomePage {
   ];
 
   // list of restaurant
-  restaurants: any;
+  stores: any;
 
-  constructor(public nav: NavController, public restaurantService: RestaurantService) {
-    restaurantService.getAll().subscribe(snapshot => {
-      this.restaurants = snapshot;
+  constructor(public nav: NavController, public storeProvider: StoreProvider, public categoryProvider: CategoryProvider) {
+    storeProvider.all().subscribe(snapshot => {
+      this.stores = snapshot;
 
       // convert children categories to array
-      this.restaurants.forEach((value, key) => {
-        let count = 0;
-        this.restaurants[key].cats = [];
-        if (value.categories) {
-          Object.keys(value.categories).forEach((catId) => {
-            if (count < 6) {
-              let cat = this.restaurants[key].categories[catId];
-              cat.$key = catId;
-              this.restaurants[key].cats.push(cat);
-            }
-            // limit to 6 cats
-            count++;
-          });
-        }
+      this.stores.forEach((value, key) => {
+        // TODO limit by 6 cats
+        categoryProvider.all(value.id).subscribe(cats => this.stores[key].cats = cats);
       });
     });
   }
 
   // view a category
-  viewCategory(restaurant, category) {
+  viewCategory(store, category) {
     this.nav.push(CategoryPage, {
-      restaurant: restaurant,
+      store: store,
       category: category
     });
   }
 
-  // view list categories of restaurant
-  viewRestaurant(restaurant) {
-    this.nav.push(CategoriesPage, {restaurant: restaurant});
+  // view list categories of store
+  viewRestaurant(store) {
+    this.nav.push(CategoriesPage, {store: store});
   }
 }

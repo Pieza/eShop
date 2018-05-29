@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { HomePage } from "../home/home";
-import { OrderService } from "../../services/order-service";
-import { CartService } from "../../services/cart-service";
+import { Cart } from "../../models/cart";
+import { OrderProvider } from "../../providers/order/order";
 
 /*
  Generated class for the LoginPage page.
@@ -15,12 +15,12 @@ import { CartService } from "../../services/cart-service";
   templateUrl: 'checkout.html'
 })
 export class CheckoutPage {
-  cart: any;
+  cart: Cart;
   isEditing = false;
   address: any;
 
   constructor(public nav: NavController, public alertController: AlertController, public navParasm: NavParams,
-              public orderService: OrderService, public cartService: CartService) {
+              public orderProvider: OrderProvider) {
     this.cart = navParasm.get('cart');
   }
 
@@ -68,7 +68,7 @@ export class CheckoutPage {
       return false;
     }
 
-    this.orderService.addRecord(this.cart.restaurants, this.address);
+    this.orderProvider.add(this.cart.stores, this.address);
 
     // show alert
     let alert = this.alertController.create({

@@ -3,9 +3,9 @@
   <ion-content class="menu-left">
     <!-- User profile -->
     <div text-center padding-top padding-bottom class="primary-bg menu-left">
-      <a menuClose (click)="viewMyProfile()">
-        <img class="profile-picture" src="{{ user.photoURL }}">
-        <h4 ion-text color="light">{{ user.displayName }}</h4>
+      <a menuClose *ngIf="user" (click)="viewAccount()">
+        <img class="profile-picture" src="{{ user.photoUrl }}">
+        <h4 ion-text color="light">{{ user.name }}</h4>
       </a>
     </div>
 
