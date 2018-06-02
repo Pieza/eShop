@@ -16,32 +16,32 @@ export class AboutPage {
   // working days
   public days = [
     {
-      'name': 'Monday',
-      'hours': '02:00pm - 10:00pm'
+      'name': 'Lunes',
+      'hours': '08:00am - 05:00pm'
     },
     {
-      'name': 'Tuesday',
-      'hours': '02:00pm - 10:00pm'
+      'name': 'Martes',
+      'hours': '08:00am - 05:00pm'
     },
     {
-      'name': 'Wednesday',
-      'hours': '02:00pm - 10:00pm'
+      'name': 'Miercoles',
+      'hours': '08:00am - 05:00pm'
     },
     {
-      'name': 'Thursday',
-      'hours': '02:00pm - 10:00pm'
+      'name': 'Jueves',
+      'hours': '08:00am - 05:00pm'
     },
     {
-      'name': 'Friday',
-      'hours': '02:00pm - 10:00pm'
+      'name': 'Viernes',
+      'hours': '08:00am - 05:00pm'
     },
     {
-      'name': 'Saturday',
-      'hours': '05:00pm - 10:00pm'
+      'name': 'Sabado',
+      'hours': '08:00am - 03:00pm'
     },
     {
-      'name': 'Sunday',
-      'hours': '05:00pm - 10:00pm'
+      'name': 'Domingo',
+      'hours': 'Cerrado'
     }
   ];
 

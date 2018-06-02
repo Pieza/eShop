@@ -18,9 +18,9 @@ import { CategoryProvider } from "../../providers/category/category";
 export class HomePage {
   // slides for slider
   public slides = [
-    "assets/img/categories/fruit.jpg",
-    "assets/img/categories/pizza.jpg",
-    "assets/img/categories/sushi.jpg"
+    "assets/img/categories/main.jpg",
+    "assets/img/categories/candados.jpg",
+    "assets/img/categories/llaves.jpg"
   ];
 
   // list of restaurant

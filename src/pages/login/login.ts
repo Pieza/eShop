@@ -31,13 +31,13 @@ export class LoginPage {
   login() {
     if (!this.email || !this.password) {
       let alert = this.alertCtrl.create({
-        message: 'Please provide email and password',
+        message: 'Por favor escribe tus credenciales',
         buttons: ['OK']
       });
       return alert.present();
     }
 
-    this.loadingProvider.present('Please wait...');
+    this.loadingProvider.present('Por favor espera...');
 
     this.userProvider.login(this.email, this.password).subscribe(authData => {
       this.loadingProvider.dismiss();

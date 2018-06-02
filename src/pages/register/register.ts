@@ -27,7 +27,7 @@ export class RegisterPage {
   register() {
     if (!this.email || !this.password) {
       let alert = this.alertCtrl.create({
-        message: 'Please provide email and password',
+        message: 'Por favor escrive un correo y contraseña',
         buttons: ['OK']
       });
       return alert.present();
@@ -35,13 +35,13 @@ export class RegisterPage {
 
     if (this.password != this.confirmPassword) {
       let alert = this.alertCtrl.create({
-        message: 'Confirm password does not match',
+        message: 'Las contraseñas no coinciden',
         buttons: ['OK']
       });
       return alert.present();
     }
 
-    this.loadingProvider.present('Please wait...');
+    this.loadingProvider.present('Por favor espera...');
 
     this.userProvider.register(this.email, this.password).subscribe(authData => {
       this.loadingProvider.dismiss();

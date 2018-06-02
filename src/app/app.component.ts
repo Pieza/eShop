@@ -16,11 +16,11 @@ import { HomePage } from '../pages/home/home';
 import { CartPage } from '../pages/cart/cart';
 // import {OfferPage} from '../pages/offer/offer';
 import { UserPage } from '../pages/user/user';
-import { SettingPage } from '../pages/setting/setting';
-import { NewsPage } from '../pages/news/news';
+//import { SettingPage } from '../pages/setting/setting';
+//import { NewsPage } from '../pages/news/news';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
-import { ChatsPage } from '../pages/chats/chats';
+//import { ChatsPage } from '../pages/chats/chats';
 import { OrdersPage } from '../pages/orders/orders';
 // end import pages
 
@@ -177,11 +177,11 @@ export class MyApp {
         // show the notifications
 
         alert = this.alertCtrl.create({
-          title: 'Order updated',
-          subTitle: 'Your ' + records.length + ' order(s) has been updated.',
+          title: 'Orden actualizada',
+          subTitle: '' + records.length + ' orden(es) han sido actualizadas',
           buttons: [
             {
-              text: 'View',
+              text: 'Ver',
               handler: data => {
                 this.nav.setRoot(OrdersPage);
                 // remove this notifications
@@ -190,7 +190,7 @@ export class MyApp {
               }
             },
             {
-              text: 'Close',
+              text: 'Cerrar',
               handler: data => {
                 this.notificationProvider.removeAll(records);
                 isShowing = false;

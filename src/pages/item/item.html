@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Item</ion-title>
+    <ion-title>{{item.name}}</ion-title>
     <ion-buttons end>
       <button ion-button>
         <ion-icon name="md-more"></ion-icon>
@@ -39,7 +39,7 @@
       </span>
 
       <span class="pull-right price" ion-text color="light">
-        ${{ item.price }}
+        ₡{{ item.price }}
       </span>
     </div>
   </div>
@@ -47,34 +47,34 @@
   <!-- Buttons -->
   <ion-grid no-padding>
     <ion-row class="item-button-group" no-padding>
-      <ion-col no-padding>
+      <!--<ion-col no-padding>
         <button ion-button block (click)="toggleFav(item)" color="gray">
           <ion-icon class="text-2x" name="ios-star" [hidden]="!item.faved"></ion-icon>
           <ion-icon class="text-2x" name="ios-star-outline" [hidden]="item.faved"></ion-icon>
-          <span class="text-sm">ADD TO FAVORITE</span>
+          <span class="text-sm">AGREGAR A FAVORITOS</span>
         </button>
-      </ion-col>
+      </ion-col>-->
       <ion-col no-padding>
         <button ion-button block (click)="addCart()">
           <ion-icon class="text-2x" name="ios-cart-outline"></ion-icon>
-          <span class="text-sm">ADD TO CART</span>
+          <span class="text-sm">AGREGAR AL CARRITO</span>
         </button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-list class="list-full-border" no-margin radio-group [(ngModel)]="size">
-    <ion-item-divider>Sizes</ion-item-divider>
+    <ion-item-divider *ngIf="item.sizes != 0">Tamaños</ion-item-divider>
     <ion-item *ngFor="let size of item.sizes, let i = index">
-      <ion-label>{{ size.name }}: ${{ size.price }}</ion-label>
+      <ion-label>{{ size.name }}: ₡{{ size.price }}</ion-label>
       <ion-radio value="{{ i }}"></ion-radio>
     </ion-item>
   </ion-list>
 
   <ion-list class="list-full-border" no-margin>
-    <ion-item-divider>Options</ion-item-divider>
+    <ion-item-divider *ngIf="item.variations != 0">Opciones</ion-item-divider>
     <ion-item *ngFor="let option of item.variations, let i = index">
-      <ion-label>{{ option.name }}: ${{ option.price }}</ion-label>
+      <ion-label>{{ option.name }}: ₡{{ option.price }}</ion-label>
       <ion-checkbox color="primary" [(ngModel)]="option.checked"></ion-checkbox>
     </ion-item>
   </ion-list>

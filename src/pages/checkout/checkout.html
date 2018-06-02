@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Checkout</ion-title>
+    <ion-title>Confirmar orden</ion-title>
     <ion-buttons end>
       <button ion-button>
         <ion-icon name="md-more"></ion-icon>
@@ -53,11 +53,11 @@
 
   <!--shipping address-->
   <div margin>
-    <span>Shipping address</span>
+    <span>Dirección de envio</span>
     <ion-icon name="md-create" class="pull-right" (click)="enableEditing()"></ion-icon>
   </div>
   <div class="card light-bg" margin-left margin-right padding>
-    <textarea [(ngModel)]="address" [disabled]="!isEditing" placeholder="Please enter shipping address" required>
+    <textarea [(ngModel)]="address" [disabled]="!isEditing" placeholder="Por favor escribe la dirección de envio." required>
     </textarea>
   </div>
 
@@ -68,11 +68,11 @@
   <ion-title>
     <span ion-text color="dark">Total</span>
     <br/>
-    <span class="bold" ion-text color="danger">${{ cart.total }}</span>
+    <span class="bold" ion-text color="danger">₡{{ cart.total }}</span>
   </ion-title>
   <ion-buttons end>
     <button ion-button (click)="buy()" color="danger">
-      PLACE ORDER
+      COMPLETAR ORDEN
     </button>
   </ion-buttons>
 </ion-footer>
