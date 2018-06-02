@@ -34,7 +34,7 @@ export class ItemPage {
   // add item to cart
   addCart() {
     let prompt = this.alertController.create({
-      title: 'Quantity',
+      title: 'Cantidad',
       message: "",
       inputs: [
         {
@@ -44,13 +44,13 @@ export class ItemPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Save',
+          text: 'Guardar',
           handler: data => {
             let variations = [];
             let size = this.size == undefined ? null : this.item.sizes[this.size];
@@ -64,17 +64,17 @@ export class ItemPage {
             this.cartProvider.addItem(this.item, parseInt(data.quantity), this.store, size, variations);
             // then alert to user
             let alert = this.alertController.create({
-              title: 'Info',
-              message: 'Item added to cart',
+              title: 'Información',
+              message: 'Item agredado al carrito',
               buttons: [
                 {
-                  text: 'Cart',
+                  text: 'Carrito',
                   handler: data => {
                     this.nav.push(CartPage);
                   }
                 },
                 {
-                  text: 'Close'
+                  text: 'Cerrar'
                 }
               ]
             });

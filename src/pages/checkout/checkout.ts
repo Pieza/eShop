@@ -27,7 +27,7 @@ export class CheckoutPage {
   // edit address
   editAddress() {
     let prompt = this.alertController.create({
-      title: 'Address',
+      title: 'Dirección',
       message: "",
       inputs: [
         {
@@ -37,13 +37,13 @@ export class CheckoutPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Save',
+          text: 'Guardar',
           handler: data => {
             console.log('Saved clicked');
           }
@@ -60,8 +60,8 @@ export class CheckoutPage {
     if (!this.address || (this.address.length < 10)) {
       // show alert
       let alert = this.alertController.create({
-        title: 'Info',
-        subTitle: 'Please enter valid address',
+        title: 'Alerta',
+        subTitle: 'Por favor ingrese una dirección válida',
         buttons: ['OK']
       });
       alert.present();
@@ -72,8 +72,8 @@ export class CheckoutPage {
 
     // show alert
     let alert = this.alertController.create({
-      title: 'Info',
-      subTitle: 'Your order has been sent.',
+      title: 'Información',
+      subTitle: 'Su orden ha sido enviada.',
       buttons: [
         {
           text: 'OK',

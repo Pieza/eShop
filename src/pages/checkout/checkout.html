@@ -53,11 +53,11 @@
 
   <!--shipping address-->
   <div margin>
-    <span>Shipping address</span>
+    <span>Dirección de envío</span>
     <ion-icon name="md-create" class="pull-right" (click)="enableEditing()"></ion-icon>
   </div>
   <div class="card light-bg" margin-left margin-right padding>
-    <textarea [(ngModel)]="address" [disabled]="!isEditing" placeholder="Please enter shipping address" required>
+    <textarea [(ngModel)]="address" [disabled]="!isEditing" placeholder="Por favor ingrese la dirección del envío" required>
     </textarea>
   </div>
 
@@ -72,7 +72,7 @@
   </ion-title>
   <ion-buttons end>
     <button ion-button (click)="buy()" color="danger">
-      PLACE ORDER
+      REALIZAR PEDIDO
     </button>
   </ion-buttons>
 </ion-footer>
